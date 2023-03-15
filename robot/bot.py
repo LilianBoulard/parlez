@@ -49,7 +49,7 @@ if bool(config["PARAMETERS"]["USE_DEFAULT_VOICES"]):
             for clip in audio_clips
             if clip.suffix == ".wav"
         ]
-        for voice_directory in (Path(__file__).parent / "tortoise_voices").iterdir()
+        for voice_directory in (Path(__file__).parent / "tortoise" / "tortoise_voices").iterdir()
         if voice_directory.is_dir()
         and voice_directory.name not in ["myself"]
         and (audio_clips := list(voice_directory.iterdir()))
