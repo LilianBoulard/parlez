@@ -5,3 +5,4 @@ py-cord[speed]
 torchaudio
 pydub
 loguru
+numba
