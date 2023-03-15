@@ -11,6 +11,9 @@ services:
     runtime: nvidia
     volumes:
       - results:/results  # `OUTPUT_DIRECTORY` in `config.ini`
+      # Override config.ini with dynamic one so that the image doesn't need
+      # to be rebuilt.
+      - config.ini:/usr/src/app/config.ini
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
     devices:
