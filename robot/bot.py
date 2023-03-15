@@ -32,32 +32,28 @@ from pathlib import Path
 bot = discord.Bot()
 
 
-reference_clips = dict(filter(
-    lambda pair: len(pair[1]) > 0,
-    {
+reference_clips = {
+    voice_directory.name: [
+        load_audio(str(clip), 22050)
+        for clip in audio_clips
+        if clip.suffix == ".wav"
+    ]
+    for voice_directory in (Path(__file__).parent / "voices").iterdir()
+    if voice_directory.is_dir()
+    and (audio_clips := list(voice_directory.iterdir()))
+}
+if bool(config["PARAMETERS"]["USE_DEFAULT_VOICES"]):
+    reference_clips.update({
         voice_directory.name: [
             load_audio(str(clip), 22050)
-            for clip in voice_directory.iterdir()
+            for clip in audio_clips
             if clip.suffix == ".wav"
         ]
-        for voice_directory in (Path(__file__).parent / "voices").iterdir()
+        for voice_directory in (Path(__file__).parent / "tortoise_voices").iterdir()
         if voice_directory.is_dir()
-    },
-))
-if bool(config["PARAMETERS"]["USE_DEFAULT_VOICES"]):
-    reference_clips.update(dict(filter(
-        lambda pair: len(pair[1]) > 0,
-        {
-            voice_directory.name: [
-                load_audio(str(clip), 22050)
-                for clip in voice_directory.iterdir()
-                if clip.suffix == ".wav"
-            ]
-            for voice_directory in (Path(__file__).parent / "tortoise_voices").iterdir()
-            if voice_directory.is_dir()
-            and voice_directory.name not in ["myself"]
-        }
-    )))
+        and voice_directory.name not in ["myself"]
+        and (audio_clips := list(voice_directory.iterdir()))
+    })
 
 supported_voices = list(reference_clips.keys())
 
