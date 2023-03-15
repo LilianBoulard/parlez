@@ -41,6 +41,7 @@ reference_clips = dict(filter(
             if clip.suffix == ".wav"
         ]
         for voice_directory in (Path(__file__).parent / "voices").iterdir()
+        if voice_directory.is_dir()
     },
 ))
 if bool(config["PARAMETERS"]["USE_DEFAULT_VOICES"]):
@@ -53,7 +54,8 @@ if bool(config["PARAMETERS"]["USE_DEFAULT_VOICES"]):
                 if clip.suffix == ".wav"
             ]
             for voice_directory in (Path(__file__).parent / "tortoise_voices").iterdir()
-            if voice_directory.name not in ["myself"]
+            if voice_directory.is_dir()
+            and voice_directory.name not in ["myself"]
         }
     )))
 
