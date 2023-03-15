@@ -1,0 +1,18 @@
+version: "2.4"
+
+
+services:
+
+  bot:
+    build:
+      context: .
+    container_name: zoo_bot
+    env_file: ./stack.env
+    restart: unless-stopped
+    runtime: nvidia
+    volumes:
+      - results:/results  # `OUTPUT_DIRECTORY` in `config.ini`
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    devices:
+      - /dev/dri:/dev/dri

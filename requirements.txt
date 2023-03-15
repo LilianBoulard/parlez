@@ -1,0 +1,7 @@
+pip
+py-cord
+py-cord[voice]
+py-cord[speed]
+torchaudio
+pydub
+loguru
