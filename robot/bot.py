@@ -38,10 +38,25 @@ reference_clips = dict(filter(
         voice_directory.name: [
             load_audio(str(clip), 22050)
             for clip in voice_directory.iterdir()
+            if clip.suffix == ".wav"
         ]
         for voice_directory in (Path(__file__).parent / "voices").iterdir()
     },
 ))
+if bool(config["PARAMETERS"]["USE_DEFAULT_VOICES"]):
+    reference_clips.update(dict(filter(
+        lambda pair: len(pair[1]) > 0,
+        {
+            voice_directory.name: [
+                load_audio(str(clip), 22050)
+                for clip in voice_directory.iterdir()
+                if clip.suffix == ".wav"
+            ]
+            for voice_directory in (Path(__file__).parent / "tortoise_voices").iterdir()
+            if voice_directory.name not in ["myself"]
+        }
+    )))
+
 supported_voices = list(reference_clips.keys())
 
 

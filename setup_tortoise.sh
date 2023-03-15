@@ -13,3 +13,4 @@ cd tortoise
 touch __init__.py
 ln -s ../../tortoise-tts/tortoise/api.py api.py
 ln -s ../../tortoise-tts/tortoise/utils utils
+ln -s ../../tortoise-tts/tortoise/voices tortoise_voices
