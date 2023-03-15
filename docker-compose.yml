@@ -3,11 +3,10 @@ version: "2.4"
 
 services:
 
-  bot:
+  parlez:
     build:
       context: .
-    container_name: zoo_bot
-    env_file: ./stack.env
+    container_name: parlez-bot
     restart: unless-stopped
     runtime: nvidia
     volumes:
