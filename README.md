@@ -11,6 +11,10 @@ The recommended way to use this project is to:
 3. Create an application->bot on the Discord interface, and add the bot token
    to `config.ini`
 4. While you're at it, modify the parameters in `config.ini` to suit your needs
+5. Run as a container with `docker-compose`:
+   ```bash
+   docker-compose up -d --build
+   ```
 
 ## Limitations
 
