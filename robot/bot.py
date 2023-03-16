@@ -29,6 +29,10 @@ from time import sleep
 from pathlib import Path
 
 
+# Download the models at runtime
+TextToSpeech()
+
+
 bot = discord.Bot()
 
 
