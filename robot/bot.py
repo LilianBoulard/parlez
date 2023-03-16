@@ -51,7 +51,10 @@ if bool(config["PARAMETERS"]["USE_DEFAULT_VOICES"]):
         ]
         for voice_directory in (Path(__file__).parent / "tortoise" / "tortoise_voices").iterdir()
         if voice_directory.is_dir()
-        and voice_directory.name not in ["myself"]
+        and (
+            voice_directory.name not in ["myself"]
+            or voice_directory.name.startswith("train_")
+        )
         and (audio_clips := list(voice_directory.iterdir()))
     })
 
@@ -61,6 +64,7 @@ supported_voices = list(reference_clips.keys())
 @bot.event
 async def on_ready():
     logger.info(f"Logged in as {bot.user!s} (ID: {bot.user.id})")
+    logger.info(f"Supported voices: {supported_voices}")
 
 
 @bot.slash_command(description="Says something with a synthetic voice.")
