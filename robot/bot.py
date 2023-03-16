@@ -29,8 +29,7 @@ from time import sleep
 from pathlib import Path
 
 
-# Download the models at runtime
-TextToSpeech()
+tts = TextToSpeech()
 
 
 bot = discord.Bot()
@@ -80,8 +79,6 @@ async def say(
         voice: discord.Option(str, choices=supported_voices, description="The synthetic voice to use"),
         message: discord.Option(str, description="The message to speak"),
 ):
-    tts = TextToSpeech()
-
     request_id = md5(voice + message)
 
     logger.info(
