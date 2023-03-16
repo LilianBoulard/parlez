@@ -49,13 +49,17 @@ if bool(config["PARAMETERS"]["USE_DEFAULT_VOICES"]):
             for clip in audio_clips
             if clip.suffix == ".wav"
         ]
-        for voice_directory in (Path(__file__).parent / "tortoise" / "tortoise_voices").iterdir()
+        for voice_directory in (Path(__file__).parent / "tortoise" / "voices").iterdir()
         if voice_directory.is_dir()
         and (audio_clips := list(voice_directory.iterdir()))
         and voice_directory.name not in ["myself"]
         and not voice_directory.name.startswith("train_")
         and any(clip.suffix == ".wav" for clip in audio_clips)
     })
+
+if bool(config["PARAMETERS"]["ALLOW_RANDOM_VOICE"]):
+    reference_clips.update({"random": None})
+
 
 supported_voices = list(reference_clips.keys())
 
