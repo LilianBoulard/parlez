@@ -51,11 +51,10 @@ if bool(config["PARAMETERS"]["USE_DEFAULT_VOICES"]):
         ]
         for voice_directory in (Path(__file__).parent / "tortoise" / "tortoise_voices").iterdir()
         if voice_directory.is_dir()
-        and (
-            voice_directory.name not in ["myself"]
-            or voice_directory.name.startswith("train_")
-        )
         and (audio_clips := list(voice_directory.iterdir()))
+        and voice_directory.name not in ["myself"]
+        and not voice_directory.name.startswith("train_")
+        and any(clip.suffix == ".wav" for clip in audio_clips)
     })
 
 supported_voices = list(reference_clips.keys())
